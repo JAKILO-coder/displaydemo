@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--        <meta http-equiv="refresh" content="1">-->
+        <script type="text/javascript" charset="utf-8">
+            var socket = io.connect('http://127.0.0.1:9000');
+
+            socket.on('refresh_page', function() {
+                // 接收到 SocketIO 消息后，刷新页面
+                location.reload();
+            });
+        </script>
+        <style>
+            .trans{transform: rotate(60deg);}
+            .container {
+                width: 1200px; /* 裁剪后的长方形宽度 */
+                height: 300px; /* 裁剪后的长方形高度 */
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+        <title>{{ title }}</title>
+
+    </head>
+    <body>
+        time: {{ this_time }}<br />
+<!--        Dist: {{ speed1 }}<br />-->
+<!--        Cumtrapz: {{ speed2 }}<br />-->
+<!--        Ped: {{ speed3 }}-->
+        <div class="container">
+            <div class="trans">{{ plot|safe }}</div>
+        </div>
+    </body>
+</html>
